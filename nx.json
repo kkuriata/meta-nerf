@@ -1,7 +1,7 @@
 {
   "npmScope": "meta-nerf",
   "affected": {
-    "defaultBase": "main"
+    "defaultBase": "develop"
   },
   "cli": {
     "defaultCollection": "@nrwl/angular"
@@ -11,13 +11,14 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    ".eslintrc.json": "*",
+    ".stylelintrc.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e", "stylelint"]
       }
     }
   },
@@ -44,5 +45,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "mn-web"
+  "defaultProject": "clients-mn-web"
 }

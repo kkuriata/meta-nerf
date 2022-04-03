@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'mn-web',
-  preset: '../../jest.preset.js',
+  displayName: 'clients-mn-web',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/apps/mn-web',
+  coverageDirectory: '../../../coverage/apps/clients/mn-web',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

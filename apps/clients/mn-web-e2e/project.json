@@ -1,0 +1,40 @@
+{
+  "root": "apps/clients/mn-web-e2e",
+  "sourceRoot": "apps/clients/mn-web-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/clients/mn-web-e2e/cypress.json",
+        "devServerTarget": "clients-mn-web:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "clients-mn-web:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "maxWarnings": 0,
+        "lintFilePatterns": ["apps/clients/mn-web-e2e/**/*.{js,ts}"]
+      }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "maxWarnings": 0,
+        "lintFilePatterns": [
+          "apps/clients/mn-web-e2e/**/*.css",
+          "apps/clients/mn-web-e2e/**/*.scss"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["clients-mn-web"]
+}
