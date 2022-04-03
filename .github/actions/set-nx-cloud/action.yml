@@ -1,0 +1,20 @@
+name: Set up Nx Cloud CI Run
+description: Sets up using distributed task execution and distributed caching
+
+inputs:
+  operation:
+    description: start or stop
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Start Nx Cloud CI Run
+      if: ${{ inputs.operation == 'start' }}
+      run: npx nx-cloud start-ci-run
+      shell: bash
+
+    - name: Stop Nx Cloud CI Run
+      if: ${{ inputs.operation == 'stop' }}
+      run: npx nx-cloud stop-all-agents
+      shell: bash

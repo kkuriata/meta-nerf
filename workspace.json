@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "clients-mn-web": "apps/clients/mn-web",
+    "clients-mn-web-e2e": "apps/clients/mn-web-e2e"
+  }
+}

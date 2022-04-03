@@ -1,0 +1,29 @@
+name: Start Nx agents
+
+on:
+  workflow_call:
+    secrets:
+      nxCloudToken:
+        required: true
+
+jobs:
+  nx-agents:
+    name: Nx agent
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        agent: [1, 2, 3]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - uses: ./.github/actions/install-dependencies
+
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: npx nx-cloud start-agent
+        env:
+          NX_CLOUD_AUTH_TOKEN: ${{ secrets.nxCloudToken }}

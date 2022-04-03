@@ -1,0 +1,106 @@
+{
+  "projectType": "application",
+  "root": "apps/clients/mn-web",
+  "sourceRoot": "apps/clients/mn-web/src",
+  "prefix": "meta-nerf",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/clients/mn-web",
+        "index": "apps/clients/mn-web/src/index.html",
+        "main": "apps/clients/mn-web/src/main.ts",
+        "polyfills": "apps/clients/mn-web/src/polyfills.ts",
+        "tsConfig": "apps/clients/mn-web/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/clients/mn-web/src/favicon.ico",
+          "apps/clients/mn-web/src/assets"
+        ],
+        "styles": ["apps/clients/mn-web/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/clients/mn-web/src/environments/environment.ts",
+              "with": "apps/clients/mn-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "clients-mn-web:build:production"
+        },
+        "development": {
+          "browserTarget": "clients-mn-web:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "clients-mn-web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "maxWarnings": 0,
+        "lintFilePatterns": [
+          "apps/clients/mn-web/src/**/*.ts",
+          "apps/clients/mn-web/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/clients/mn-web"],
+      "options": {
+        "jestConfig": "apps/clients/mn-web/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "maxWarnings": 0,
+        "lintFilePatterns": [
+          "apps/clients/mn-web/**/*.css",
+          "apps/clients/mn-web/**/*.scss"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
