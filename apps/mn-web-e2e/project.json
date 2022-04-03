@@ -1,0 +1,28 @@
+{
+  "root": "apps/mn-web-e2e",
+  "sourceRoot": "apps/mn-web-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/mn-web-e2e/cypress.json",
+        "devServerTarget": "mn-web:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "mn-web:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mn-web-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["mn-web"]
+}
