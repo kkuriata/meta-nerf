@@ -1,0 +1,41 @@
+name: Install dependencies
+description: Setup Node.js and install deps with Yarn
+
+runs:
+  using: composite
+  steps:
+    - name: Derive appropriate SHAs for BASE and HEAD for `nx affected` commands
+      uses: nrwl/nx-set-shas@v2.2.0
+      with:
+        main-branch-name: develop
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
+    - name: Fetch data
+      run: git fetch --no-tags --prune --depth=1 origin develop
+      shell: bash
+
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      shell: bash
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      id: yarn-cache
+      with:
+        path: |
+          **/node_modules
+          **/.cache
+          ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile --prefer-offline && yarn cypress install
+      shell: bash
